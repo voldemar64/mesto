@@ -5,6 +5,7 @@
   width: 32px;
   height: 32px;
   border: none;
+  padding: 0;
   background: center center no-repeat url('../../../images/close_icon.svg') transparent;
   transition: opacity .3s;
 }
