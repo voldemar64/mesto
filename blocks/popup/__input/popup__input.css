@@ -4,7 +4,7 @@
   font-family: 'Inter', 'Arial', sans-serif;
   font-weight: 400;
   font-size: 14px;
-  line-height: 16.9px;
+  line-height: 16.94px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
@@ -44,6 +44,9 @@
 @media screen and (max-width: 767px) {
   .popup__input {
     width: 238px;
-    padding: 0 0 13px 0;
+    padding: 0 0 10px 0;
+  }
+  .popup__input:first-of-type {
+    margin-bottom: 25px;
   }
 }

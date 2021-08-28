@@ -6,6 +6,6 @@
 
 @media screen and (max-width: 1023px) {
   .profile__info {
-    gap: 14px;
+    gap: 8px;
   }
 }
