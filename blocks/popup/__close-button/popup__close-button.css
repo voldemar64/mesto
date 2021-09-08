@@ -16,6 +16,10 @@
   transition: opacity .2s;
 }
 
+.popup__close-button:focus {
+  outline: #5982fa 3px solid;
+}
+
 @media screen and (max-width: 767px) {
   .popup__close-button {
     background-image: url('../../../images/close_icon-320.svg');
