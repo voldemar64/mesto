@@ -26,7 +26,7 @@ const fullscreenPopupImage = document.querySelector('.popup__image');
 const initialCards = [
   {
     name: 'ачё)',
-    link: '../../images/mat.jpg'
+    link: '../../../images/mat.jpg'
   },
   {
     name: 'ачё)',
@@ -34,19 +34,19 @@ const initialCards = [
   },
   {
     name: 'ачё)',
-    link: '../../images/putin4.jpg'
+    link: '../../../images/putin4.jpg'
   },
   {
     name: 'ачё)',
-    link: '../../images/putin3.jpg'
+    link: '../../../images/putin3.jpg'
   },
   {
     name: 'ачё)',
-    link: '../../images/putin2.jpg'
+    link: '../../../images/putin2.jpg'
   },
   {
     name: 'ачё)',
-    link: '../../images/putin1.jpg'
+    link: '../../../images/putin1.jpg'
   }
 ]; // извините, если вам картинки несмешными покажутся
    //просто сейчас 2:01 а мне в школу просыпаться в 7:40
