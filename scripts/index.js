@@ -38,7 +38,7 @@ const initialCards = [
   },
   {
     name: 'ачё)',
-    link: 'http://risovach.ru/upload/2018/06/mem/eto-byl-ya-dio_178684122_orig_.jpg'
+    link: 'https://r1.mt.ru/r29/photoDA1A/20511755605-0/jpg/bp.jpeg'
   },
   {
     name: 'ачё)',
