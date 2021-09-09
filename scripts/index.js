@@ -14,7 +14,7 @@ const addPicPopupContainer = document.querySelector('.popup__container_form_add'
 
 const nameInput = document.querySelector('.popup__input_value_name');
 const jobInput = document.querySelector('.popup__input_value_job');
-const placeInput = document.querySelector('.popup__input_value_place');
+const titleInput = document.querySelector('.popup__input_value_title');
 const linkInput = document.querySelector('.popup__input_value_link');
 
 const profileName = document.querySelector('.profile__title');
@@ -77,12 +77,14 @@ const submitPicture = (evt) => {
   evt.preventDefault();
   newCard = [
     {
-      name: `${placeInput.value}`,
+      name: `${titleInput.value}`,
       link: `${linkInput.value}`
     }
   ];
   addCard(newCard);
   closePopup(addPopup);
+  titleInput.value = '';
+  linkInput.value = '';
 }
 
 const openFullscreenPopup = (evt) => {
