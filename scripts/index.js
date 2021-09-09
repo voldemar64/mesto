@@ -25,27 +25,27 @@ const fullscreenPopupImage = document.querySelector('.popup__image');
 
 const initialCards = [
   {
-    name: 'ачё)',
+    name: 'ржака))',
     link: 'https://www.anekdot.ru/i/caricatures/normal/19/6/30/1561912837.jpg'
   },
   {
-    name: 'ачё)',
+    name: 'вот это хохма))',
     link: 'https://www.anekdot.ru/i/caricatures/normal/21/9/9/1631139130.jpg'
   },
   {
-    name: 'ачё)',
+    name: 'маты',
     link: 'https://bestmemes.ucoz.net/_nw/3/82360999.jpg'
   },
   {
-    name: 'ачё)',
+    name: 'Дыо',
     link: 'https://r1.mt.ru/r29/photoDA1A/20511755605-0/jpg/bp.jpeg'
   },
   {
-    name: 'ачё)',
+    name: 'жожа',
     link: 'https://avatars.mds.yandex.net/get-vthumb/3337002/b1c2b05a19388e84dda4b34e8ab82588/564x318_1'
   },
   {
-    name: 'ачё)',
+    name: 'мем',
     link: 'https://screenlifer.com/wp-content/uploads/2019/04/38842051_1551724358302-1-1024x644.jpg'
   }
 ]; // извините, если вам картинки несмешными покажутся
