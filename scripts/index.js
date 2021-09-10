@@ -20,6 +20,9 @@ const profileJob = document.querySelector('.profile__subtitle');
 const fullscreenPopupSubtitle = document.querySelector('.popup__subtitle');
 const fullscreenPopupImage = document.querySelector('.popup__image');
 
+const cardList = document.querySelector('.cards__list');
+const cardTemplate = document.querySelector('.template').content.querySelector('.card');
+
 const initialCards = [
   {
     name: 'ржака))',
@@ -66,8 +69,8 @@ const addLike = (evt) => {
   evt.target.classList.toggle('card__like-button_liked');
 }
 
-const renderCard = (card, list) => {
-  list.prepend(card);
+const renderCard = (card) => {
+  cardList.prepend(card);
 }
 
 const submitProfile = (evt) => {
@@ -79,13 +82,12 @@ const submitProfile = (evt) => {
 
 const submitPicture = (evt) => {
   evt.preventDefault();
-  newCard = [
+  newCard =
     {
       name: `${titleInput.value}`,
       link: `${linkInput.value}`
-    }
-  ];
-  generateCard(newCard[0]);
+    };
+  renderCard(generateCard(newCard));
   closePopup(addPopup);
   titleInput.value = '';
   linkInput.value = '';
@@ -102,8 +104,7 @@ const openFullscreenPopup = (evt) => {
 }
 
 const generateCard = (photoData) => {
-  const cardElement = document.querySelector('.template').content.querySelector('.card').cloneNode(true);
-  const cardList = document.querySelector('.cards__list');
+  const cardElement = cardTemplate.cloneNode(true);
 
   cardElement.querySelector('.card__photo').src = photoData.link;
   cardElement.querySelector('.card__photo').alt = photoData.name;
@@ -112,11 +113,11 @@ const generateCard = (photoData) => {
   cardElement.querySelector('.card__delete-button').addEventListener('click', deleteCard);
   cardElement.querySelector('.card__like-button').addEventListener('click', addLike);
 
-  renderCard(cardElement, cardList);
+  return cardElement
 }
 
 initialCards.forEach((defaultPhoto) => {
-  generateCard(defaultPhoto);
+  renderCard(generateCard(defaultPhoto));
 });
 
 editProfileButton.addEventListener('click', () => {
