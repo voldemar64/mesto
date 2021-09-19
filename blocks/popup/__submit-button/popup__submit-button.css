@@ -7,21 +7,21 @@
   width: 358px;
   height: 50px;
   padding: 0;
-  margin: 48.5px 0 37px;
+  margin: 18.5px 0 37px;
   border: none;
   border-radius: 2px;
-  transition: background-color .3s;
   font-family: 'Inter', 'Arial', sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 21.8px;
   text-align: center;
   color: #fff;
+  transition: background-color .3s;
 }
 
 .popup__submit-button:hover {
   background-color: rgba(0, 0, 0, .8);
-  transition: opacity .2s;
+  transition: background-color .2s;
 }
 
 .popup__submit-button:focus {
