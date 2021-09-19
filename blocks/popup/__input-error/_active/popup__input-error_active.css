@@ -8,3 +8,10 @@
   align-self: flex-start;
   color: #FF0000;
 }
+
+@media screen and (max-width: 767px) {
+  .popup__input-error {
+    margin-bottom: 5px;
+    margin-left: 25px;
+  }
+}
