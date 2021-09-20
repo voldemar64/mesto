@@ -19,6 +19,7 @@ const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 const fullscreenPopupSubtitle = document.querySelector('.popup__subtitle');
 const fullscreenPopupImage = document.querySelector('.popup__image');
+const buttonElement = addPicForm.querySelector('.popup__submit-button');
 
 const cardList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.template').content.querySelector('.card');
@@ -97,7 +98,7 @@ const submitProfile = evt => {
 
 const submitPicture = evt => {
   evt.preventDefault();
-  newCard =
+  const newCard =
     {
       name: `${titleInput.value}`,
       link: `${linkInput.value}`
@@ -108,22 +109,22 @@ const submitPicture = evt => {
   linkInput.value = '';
 }
 
-const openFullscreenPopup = evt => {
-  const card = evt.target.closest('.card')
-  const cardText = card.querySelector('.card__heading').textContent;
-
-  fullscreenPopupSubtitle.textContent = cardText;
-  fullscreenPopupImage.alt = cardText;
-  fullscreenPopupImage.src = card.querySelector('.card__photo').src;
+const openFullscreenPopup = (link, name) => {
+  fullscreenPopupSubtitle.textContent = name;
+  fullscreenPopupImage.alt = name;
+  fullscreenPopupImage.src = link;
   openPopup(fullscreenPopup);
 }
 
 const generateCard = photoData => {
   const cardElement = cardTemplate.cloneNode(true);
+  const cardPhoto = cardElement.querySelector('.card__photo');
 
-  cardElement.querySelector('.card__photo').src = photoData.link;
-  cardElement.querySelector('.card__photo').alt = photoData.name;
-  cardElement.querySelector('.card__photo').addEventListener('click', openFullscreenPopup);
+  cardPhoto.src = photoData.link;
+  cardPhoto.alt = photoData.name;
+  cardPhoto.addEventListener('click', () => {
+    openFullscreenPopup(photoData.link, photoData.name);
+  });
   cardElement.querySelector('.card__heading').textContent = photoData.name;
   cardElement.querySelector('.card__delete-button').addEventListener('click', deleteCard);
   cardElement.querySelector('.card__like-button').addEventListener('click', addLike);
@@ -145,7 +146,6 @@ closeProfileButton.addEventListener('click', () => {
 });
 
 addButton.addEventListener('click', () => {
-  const buttonElement = addPicForm.querySelector('.popup__submit-button');
   buttonElement.setAttribute('disabled', 'pleasework');
   buttonElement.classList.add('popup__submit-button_disabled');
   openPopup(addPopup);
