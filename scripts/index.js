@@ -7,8 +7,9 @@ const closeFullscreenButton = document.querySelector('.popup__close-button_form_
 const editPopup = document.querySelector('.popup_form_edit');
 const addPopup = document.querySelector('.popup_form_add');
 const fullscreenPopup = document.querySelector('.popup_form_fullscreen');
-const profileForm = document.querySelector('.popup__container_form_edit');
-const addPicForm = document.querySelector('.popup__container_form_add');
+
+const profileForm = document.forms.profile_edit;
+const addPicForm = document.forms.add_pic;
 
 const nameInput = document.querySelector('.popup__input_value_name');
 const jobInput = document.querySelector('.popup__input_value_job');
@@ -105,8 +106,7 @@ const submitPicture = evt => {
     };
   renderCard(generateCard(newCard));
   closePopup(addPopup);
-  titleInput.value = '';
-  linkInput.value = '';
+  addPicForm.reset();
 }
 
 const openFullscreenPopup = (link, name) => {
