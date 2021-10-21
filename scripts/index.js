@@ -6,7 +6,6 @@ const closeFullscreenButton = document.querySelector('.popup__close-button_form_
 
 const editPopup = document.querySelector('.popup_form_edit');
 const addPopup = document.querySelector('.popup_form_add');
-const fullscreenPopup = document.querySelector('.popup_form_fullscreen');
 
 const profileForm = document.forms.profile_edit;
 const addPicForm = document.forms.add_pic;
@@ -18,12 +17,34 @@ const linkInput = document.querySelector('.popup__input_value_link');
 
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
-const fullscreenPopupSubtitle = document.querySelector('.popup__subtitle');
-const fullscreenPopupImage = document.querySelector('.popup__image');
 const buttonElement = addPicForm.querySelector('.popup__submit-button');
 
 const cardList = document.querySelector('.cards__list');
-const cardTemplate = document.querySelector('.template').content.querySelector('.card');
+
+import { fullscreenPopup, openPopup, closePopup } from './utils.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
+const editFormValidation = new FormValidator({
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__input_invalid',
+  errorClass: 'popup__input-error_active'},
+  profileForm
+);
+
+const addFormValidation = new FormValidator({
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__input_invalid',
+  errorClass: 'popup__input-error_active'},
+  addPicForm
+);
+
+editFormValidation.enableValidation();
+addFormValidation.enableValidation();
 
 const initialCards = [
   {
@@ -52,49 +73,15 @@ const initialCards = [
   }
 ];
 
-const escPopupClosing =  evt => {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
-};
-
-const overlayPopupClosing = evt => {
-  if (evt.target.classList.contains('popup')) {
-    closePopup(evt.target);
-  }
-};
-
-const openPopup = popup => {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', escPopupClosing);
-  popup.addEventListener('click', overlayPopupClosing);
-
-}
-
-const closePopup = popup => {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', escPopupClosing);
-  popup.removeEventListener('click', overlayPopupClosing);
-}
-
-const deleteCard = evt => {
-  evt.target.closest('.card').remove();
-}
-
-const addLike = evt => {
-  evt.target.classList.toggle('card__like-button_liked');
-}
-
-const renderCard = card => {
-  cardList.prepend(card);
-}
-
 const submitProfile = evt => {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(editPopup);
+}
+
+const renderCard = card => {
+  cardList.prepend(card);
 }
 
 const submitPicture = evt => {
@@ -104,36 +91,15 @@ const submitPicture = evt => {
       name: `${titleInput.value}`,
       link: `${linkInput.value}`
     };
-  renderCard(generateCard(newCard));
+  const card = new Card(newCard);
+  renderCard(card.generateCard());
   closePopup(addPopup);
   addPicForm.reset();
 }
 
-const openFullscreenPopup = (link, name) => {
-  fullscreenPopupSubtitle.textContent = name;
-  fullscreenPopupImage.alt = name;
-  fullscreenPopupImage.src = link;
-  openPopup(fullscreenPopup);
-}
-
-const generateCard = photoData => {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardPhoto = cardElement.querySelector('.card__photo');
-
-  cardPhoto.src = photoData.link;
-  cardPhoto.alt = photoData.name;
-  cardPhoto.addEventListener('click', () => {
-    openFullscreenPopup(photoData.link, photoData.name);
-  });
-  cardElement.querySelector('.card__heading').textContent = photoData.name;
-  cardElement.querySelector('.card__delete-button').addEventListener('click', deleteCard);
-  cardElement.querySelector('.card__like-button').addEventListener('click', addLike);
-
-  return cardElement
-}
-
 initialCards.forEach(defaultPhoto => {
-  renderCard(generateCard(defaultPhoto));
+  const card = new Card(defaultPhoto);
+  renderCard(card.generateCard());
 });
 
 editProfileButton.addEventListener('click', () => {
