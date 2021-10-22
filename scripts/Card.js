@@ -1,4 +1,4 @@
-import { openFullscreenPopup, cardTemplate } from './utils.js';
+import { openFullscreenPopup } from './utils.js';
 
 export default class Card {
   constructor(data) {
@@ -25,8 +25,12 @@ export default class Card {
   }
 
   _getTemplate() {
-    const cardElement = cardTemplate.cloneNode(true);
-    return cardElement;
+    const cardTemplate = document
+    .querySelector('.template')
+    .content
+    .querySelector('.card')
+    .cloneNode(true);
+    return cardTemplate;
   }
 
   generateCard() {
@@ -35,6 +39,8 @@ export default class Card {
 
     this._element.querySelector('.card__heading').textContent = this._text;
     this._element.querySelector('.card__photo').src = this._link;
+    this._element.querySelector('.card__photo').alt = this._text;
+
     return this._element;
   }
 }

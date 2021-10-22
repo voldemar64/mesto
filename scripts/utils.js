@@ -1,26 +1,39 @@
 const fullscreenPopup = document.querySelector('.popup_form_fullscreen');
 const fullscreenPopupSubtitle = document.querySelector('.popup__subtitle');
 const fullscreenPopupImage = document.querySelector('.popup__image');
-const cardTemplate = document.querySelector('.template').content.querySelector('.card');
 
-const escPopupClosing =  evt => {
+const escPopupClosing =  (evt, popupForm) => {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
+    resetAddPopup(popupForm);
   }
 };
 
-const overlayPopupClosing = evt => {
+const overlayPopupClosing = (evt, popupForm) => {
   if (evt.target.classList.contains('popup')) {
     closePopup(evt.target);
+    resetAddPopup(popupForm);
   }
 };
 
-const openPopup = popup => {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', escPopupClosing);
-  popup.addEventListener('click', overlayPopupClosing);
+const resetAddPopup = popupForm => {
+  if (popupForm.classList.contains('popup__container_form_add')) {
+    popupForm.reset();
+  }
 }
+
+const openPopup = popup => {
+  const popupForm =  popup.querySelector('.popup__container');
+
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', (evt) => {
+    escPopupClosing(evt, popupForm);
+  });
+  popup.addEventListener('click', (evt) => {
+    overlayPopupClosing(evt, popupForm);
+  });
+};
 
 const openFullscreenPopup = (link, name) => {
   fullscreenPopupSubtitle.textContent = name;
@@ -35,4 +48,4 @@ const closePopup = popup => {
   popup.removeEventListener('click', overlayPopupClosing);
 }
 
-export { fullscreenPopup, openPopup, closePopup, openFullscreenPopup, cardTemplate };
+export { fullscreenPopup, openPopup, closePopup, openFullscreenPopup };

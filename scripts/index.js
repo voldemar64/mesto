@@ -25,23 +25,17 @@ import { fullscreenPopup, openPopup, closePopup } from './utils.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
-const editFormValidation = new FormValidator({
+const formData = {
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit-button',
   inactiveButtonClass: 'popup__submit-button_disabled',
   inputErrorClass: 'popup__input_invalid',
-  errorClass: 'popup__input-error_active'},
-  profileForm
-);
+  errorClass: 'popup__input-error_active'
+}
 
-const addFormValidation = new FormValidator({
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: 'popup__submit-button_disabled',
-  inputErrorClass: 'popup__input_invalid',
-  errorClass: 'popup__input-error_active'},
-  addPicForm
-);
+const editFormValidation = new FormValidator(formData, profileForm);
+
+const addFormValidation = new FormValidator(formData, addPicForm);
 
 editFormValidation.enableValidation();
 addFormValidation.enableValidation();
@@ -84,6 +78,11 @@ const renderCard = card => {
   cardList.prepend(card);
 }
 
+const createCard = (newCard) => {
+  const card = new Card(newCard);
+  return card;
+}
+
 const submitPicture = evt => {
   evt.preventDefault();
   const newCard =
@@ -91,20 +90,21 @@ const submitPicture = evt => {
       name: `${titleInput.value}`,
       link: `${linkInput.value}`
     };
-  const card = new Card(newCard);
+  const card = createCard(newCard);
   renderCard(card.generateCard());
   closePopup(addPopup);
   addPicForm.reset();
 }
 
 initialCards.forEach(defaultPhoto => {
-  const card = new Card(defaultPhoto);
+  const card = createCard(defaultPhoto);
   renderCard(card.generateCard());
 });
 
 editProfileButton.addEventListener('click', () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  editFormValidation.resetValidation();
   openPopup(editPopup);
 });
 closeProfileButton.addEventListener('click', () => {
@@ -112,12 +112,12 @@ closeProfileButton.addEventListener('click', () => {
 });
 
 addButton.addEventListener('click', () => {
-  buttonElement.setAttribute('disabled', 'pleasework');
-  buttonElement.classList.add('popup__submit-button_disabled');
+  addFormValidation.resetValidation();
   openPopup(addPopup);
 });
 closeAddFormButton.addEventListener('click', () => {
   closePopup(addPopup);
+  addPicForm.reset();
 });
 
 closeFullscreenButton.addEventListener('click', () => {
