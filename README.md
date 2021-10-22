@@ -6,5 +6,6 @@
   * VS code
   * semantic HTML/CSS
   * Javascript
+  * OOP
   * BEM Nested
   * adaptivity
