@@ -4,6 +4,11 @@ export default class Card {
   constructor(data) {
     this._text = data.name;
     this._link = data.link;
+    this._element = document
+    .querySelector('.template')
+    .content
+    .querySelector('.card')
+    .cloneNode(true);
   }
 
   _setEventListeners() {
@@ -24,17 +29,7 @@ export default class Card {
     evt.target.classList.toggle('card__like-button_liked');
   }
 
-  _getTemplate() {
-    const cardTemplate = document
-    .querySelector('.template')
-    .content
-    .querySelector('.card')
-    .cloneNode(true);
-    return cardTemplate;
-  }
-
   generateCard() {
-    this._element = this._getTemplate();
     this._setEventListeners();
 
     this._element.querySelector('.card__heading').textContent = this._text;

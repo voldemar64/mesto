@@ -17,7 +17,6 @@ const linkInput = document.querySelector('.popup__input_value_link');
 
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
-const buttonElement = addPicForm.querySelector('.popup__submit-button');
 
 const cardList = document.querySelector('.cards__list');
 
@@ -112,12 +111,12 @@ closeProfileButton.addEventListener('click', () => {
 });
 
 addButton.addEventListener('click', () => {
+  addPicForm.reset();
   addFormValidation.resetValidation();
   openPopup(addPopup);
 });
 closeAddFormButton.addEventListener('click', () => {
   closePopup(addPopup);
-  addPicForm.reset();
 });
 
 closeFullscreenButton.addEventListener('click', () => {
