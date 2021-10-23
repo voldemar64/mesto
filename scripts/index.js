@@ -20,6 +20,9 @@ const profileJob = document.querySelector('.profile__subtitle');
 
 const cardList = document.querySelector('.cards__list');
 
+const templateSelector = '.template';
+
+
 import { fullscreenPopup, openPopup, closePopup } from './utils.js';
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
@@ -78,7 +81,7 @@ const renderCard = card => {
 }
 
 const createCard = (newCard) => {
-  const card = new Card(newCard);
+  const card = new Card(newCard, templateSelector);
   return card;
 }
 

@@ -1,14 +1,10 @@
 import { openFullscreenPopup } from './utils.js';
 
 export default class Card {
-  constructor(data) {
+  constructor(data, templateSelector) {
     this._text = data.name;
     this._link = data.link;
-    this._element = document
-    .querySelector('.template')
-    .content
-    .querySelector('.card')
-    .cloneNode(true);
+    this._templateSelector = templateSelector;
   }
 
   _setEventListeners() {
@@ -30,6 +26,12 @@ export default class Card {
   }
 
   generateCard() {
+    this._element = document
+    .querySelector(this._templateSelector)
+    .content
+    .querySelector('.card')
+    .cloneNode(true);
+    
     this._setEventListeners();
 
     this._element.querySelector('.card__heading').textContent = this._text;

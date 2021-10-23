@@ -16,15 +16,9 @@ function overlayPopupClosing(evt) {
 };
 
 const openPopup = popup => {
-  const popupForm =  popup.querySelector('.popup__container');
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', (evt) => {
-    closeByEscape(evt, popupForm);
-  });
-  popup.addEventListener('click', (evt) => {
-    overlayPopupClosing(evt, popupForm);
-  });
-};
+  document.addEventListener('keydown', closeByEscape);
+  popup.addEventListener('click', overlayPopupClosing)};
 
 const openFullscreenPopup = (link, name) => {
   fullscreenPopupSubtitle.textContent = name;
@@ -35,7 +29,7 @@ const openFullscreenPopup = (link, name) => {
 
 const closePopup = popup => {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', escPopupClosing);
+  document.removeEventListener('keydown', closeByEscape);
   popup.removeEventListener('click', overlayPopupClosing);
 };
 
