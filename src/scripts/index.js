@@ -22,6 +22,7 @@ const cardList = document.querySelector('.cards__list');
 
 const templateSelector = '.template';
 
+import '../pages/index.css';
 
 import { fullscreenPopup, openPopup, closePopup } from './utils.js';
 import Card from './Card.js';
