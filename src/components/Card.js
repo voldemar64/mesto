@@ -13,6 +13,7 @@ export default class Card {
 
     this._element.querySelector('.card__delete-button').addEventListener('click', () => {
       this._element.remove();
+      this._element = null;
     });
 
     this._element.querySelector('.card__photo').addEventListener('click', () => {
@@ -33,9 +34,10 @@ export default class Card {
 
     this._setEventListeners();
 
+    const cardPhoto = this._element.querySelector('.card__photo')
     this._element.querySelector('.card__heading').textContent = this._text;
-    this._element.querySelector('.card__photo').src = this._link;
-    this._element.querySelector('.card__photo').alt = this._text;
+    cardPhoto.src = this._link;
+    cardPhoto.alt = this._text;
 
     return this._element;
   }
