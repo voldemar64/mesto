@@ -1,10 +1,9 @@
-import { openFullscreenPopup } from './utils.js';
-
 export default class Card {
-  constructor(data, templateSelector) {
-    this._text = data.name;
+  constructor(data, templateSelector, handleCardClick) {
+    this._text = data.title;
     this._link = data.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _setEventListeners() {
@@ -17,7 +16,7 @@ export default class Card {
     });
 
     this._element.querySelector('.card__photo').addEventListener('click', () => {
-      openFullscreenPopup(this._link, this._text);
+      this._handleCardClick(this._link, this._text);
     });
   }
 
@@ -31,7 +30,7 @@ export default class Card {
     .content
     .querySelector('.card')
     .cloneNode(true);
-    
+
     this._setEventListeners();
 
     this._element.querySelector('.card__heading').textContent = this._text;
