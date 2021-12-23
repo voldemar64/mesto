@@ -4,8 +4,8 @@
   height: 19px;
   border: none;
   padding: 0;
-  margin-right: 4.8px;
   align-self: center;
+  margin-bottom: 3px;
   background: center center no-repeat url('../../../images/like.svg') transparent;
   transition: opacity .3s;
 }
