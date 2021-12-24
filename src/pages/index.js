@@ -50,13 +50,14 @@ const api = new Api(
   }
 );
 
-api.getUserInfo()
-  .then(res => {
-    userInfo.setUserInfo(res);
-    userInfo.setUserAvatar(res);
-    userId = res._id;
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo(userData);
+    userInfo.setUserAvatar(userData);
+    userId = userData._id;
+    renderCard.renderItems(cards);
   })
-  .catch(err => console.log(`Ошибка при изначальной отрисовке данных: ${err}`));
+  .catch(err => console.log(`Ошибка при изначальной отрисовке данных: ${err}`))
 
 const userInfo = new UserInfo({
   name: profileName,
@@ -106,6 +107,9 @@ const popupWithForm = new PopupWithForm(
         popupWithForm.close();
       })
       .catch(err => console.log(`Ошибка создания карточки: ${err}`))
+      .finally(() => {
+        popupWithForm.loading(false);
+      });
   }
 );
 
@@ -162,12 +166,6 @@ function createCard(newCard) {
   );
   return card.generateCard();
 };
-
-api.getInitialCards()
-  .then(res => {
-    renderCard.renderItems(res)
-  })
-  .catch(err => console.log(`Ошибка при отрисовке начальных карточек: ${err}`));
 
 editProfileButton.addEventListener('click', () => {
   const user = userInfo.getUserInfo();

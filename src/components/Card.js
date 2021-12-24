@@ -1,5 +1,3 @@
-import { addButton } from "../utils/constants";
-
 export default class Card {
   constructor({ data, handleDeleteCard, handleLikeClick, handleCardClick }, templateSelector, userId) {
     this._name = data.name;
@@ -19,7 +17,7 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.card__like-button').addEventListener('click', () => {
+    this._likeButton.addEventListener('click', () => {
       this._handleLikeClick()
     });
     this._element.querySelector('.card__delete-button').addEventListener('click', () => {
