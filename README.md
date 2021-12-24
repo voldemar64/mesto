@@ -9,4 +9,6 @@
   * adaptivity
   * Javascript
   * OOP
+  * API
+  * Asynchronous JavaScript
   * Webpack
