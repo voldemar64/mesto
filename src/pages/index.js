@@ -1,3 +1,6 @@
+//import all constants
+//and classes
+
 import './index.css';
 
 import {
@@ -35,10 +38,14 @@ import PopupWithImage from '../components/PopupWithImage.js';
 
 let userId;
 
+//copies of forms' validation
+
 const editFormValidation = new FormValidator(formData, profileForm);
 const addFormValidation = new FormValidator(formData, addPicForm);
 const avatarFormValidation = new FormValidator(formData, avatarForm);
 
+//copy of popup
+//with confirm of deletion
 
 const popupWithSubmit = new PopupWithSubmit(deletePopup);
 
@@ -50,6 +57,8 @@ const api = new Api(
   }
 );
 
+//rendering starting info
+
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cards]) => {
     userInfo.setUserInfo(userData);
@@ -57,13 +66,17 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     userId = userData._id;
     renderCard.renderItems(cards);
   })
-  .catch(err => console.log(`Ошибка при изначальной отрисовке данных: ${err}`))
+  .catch(err => console.log(`Ошибка при изначальной отрисовке данных: ${err}`));
+
+//getting user info
 
 const userInfo = new UserInfo({
   name: profileName,
   job: profileJob,
   avatar: profileAvatar
 });
+
+//copy of avatar form
 
 const popupWithAvatar = new PopupWithForm(
   avatarPopup,
@@ -81,6 +94,8 @@ const popupWithAvatar = new PopupWithForm(
   }
 );
 
+//copy of user info form
+
 const popupWithInfo = new PopupWithForm(
   editPopup,
   data => {
@@ -96,6 +111,8 @@ const popupWithInfo = new PopupWithForm(
       });
   }
 );
+
+//copy of new card form
 
 const popupWithForm = new PopupWithForm(
   addPopup,
@@ -113,11 +130,16 @@ const popupWithForm = new PopupWithForm(
   }
 );
 
+//copy of fullscreen popup
+
 const popupWithImage = new PopupWithImage(
   fullscreenPopup,
   fullscreenPopupSubtitle,
   fullscreenPopupImage
 );
+
+//adding card
+//to the list
 
 const renderCard = new Section(
   item => {
@@ -125,6 +147,8 @@ const renderCard = new Section(
   },
   cardList
 );
+
+//creating card
 
 function createCard(newCard) {
   const card = new Card({
@@ -167,6 +191,8 @@ function createCard(newCard) {
   return card.generateCard();
 };
 
+//adding listeners
+
 editProfileButton.addEventListener('click', () => {
   const user = userInfo.getUserInfo();
   nameInput.value = user.name;
@@ -184,9 +210,14 @@ editAvatarButton.addEventListener('click', () => {
 });
 
 
+//enable validation
+//of forms
+
 avatarFormValidation.enableValidation();
 editFormValidation.enableValidation();
 addFormValidation.enableValidation();
+
+//setting event listeners
 
 popupWithInfo.setEventListeners();
 popupWithImage.setEventListeners();
