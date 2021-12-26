@@ -7,8 +7,7 @@
   * semantic HTML/CSS
   * BEM Nested
   * adaptivity
-  * Javascript
+  * Asynchronous JavaScript
   * OOP
   * API
-  * Asynchronous JavaScript
   * Webpack
